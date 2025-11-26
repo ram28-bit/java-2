@@ -1,0 +1,62 @@
+import java.util.Scanner;
+
+public class TemperatureConverter {
+
+    // Method to convert Fahrenheit → Celsius
+    public static double fahrenheitToCelsius(double f) {
+        return (f - 32) * 5 / 9.0;
+    }
+
+    // Method to convert Celsius → Fahrenheit
+    public static double celsiusToFahrenheit(double c) {
+        return (c * 9 / 5.0) + 32;
+    }
+
+    // Method to convert Fahrenheit → Kelvin
+    public static double fahrenheitToKelvin(double f) {
+        return (f - 32) * 5 / 9.0 + 273.15;
+    }
+
+    public static void main(String[] args) {
+
+        Scanner scanner = new Scanner(System.in);
+
+        System.out.println("===== Temperature Converter =====");
+
+        while (true) {
+
+            System.out.print("\nEnter temperature in Fahrenheit: ");
+            double fahrenheit = scanner.nextDouble();
+
+            // Validation for Absolute Zero
+            if (fahrenheit < -459.67) {
+                System.out.println("Invalid Input! Temperature cannot be below absolute zero (-459.67°F).");
+                continue;   // ask again
+            }
+
+            // Conversions
+            double celsius = fahrenheitToCelsius(fahrenheit);
+            double kelvin = fahrenheitToKelvin(fahrenheit);
+
+            // Formatted Output
+            System.out.printf("\n[Conversion Results]");
+            System.out.printf("\n%.2f°F = %.2f°C", fahrenheit, celsius);
+            System.out.printf("\n%.2f°F = %.2f K\n", fahrenheit, kelvin);
+
+            // Reverse Conversion (Celsius → Fahrenheit)
+            double reverseF = celsiusToFahrenheit(celsius);
+            System.out.printf("Reverse Check: %.2f°C = %.2f°F\n", celsius, reverseF);
+
+            // Ask if user wants to continue
+            System.out.print("\nConvert another temperature? (y/n): ");
+            String choice = scanner.next();
+
+            if (!choice.equalsIgnoreCase("y")) {
+                System.out.println("Exiting... Thank you!");
+                break;
+            }
+        }
+
+        scanner.close();
+    }
+}
